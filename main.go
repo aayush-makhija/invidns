@@ -114,7 +114,3 @@ var (
 	_ caddyfile.Unmarshaler = (*Provider)(nil)
 	_ caddy.Provisioner     = (*Provider)(nil)
 )
-
-func main() {
-	// Main function typically remains empty for Caddy modules.
-}
