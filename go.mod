@@ -1,4 +1,4 @@
-module main.go
+module github.com/aayush-makhija/invidns
 
 go 1.22.1
 
