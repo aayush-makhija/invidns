@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"time"
 	"github.com/caddyserver/caddy/v2"
+	"github.com/caddyserver/caddy/v2/caddyconfig/caddyfile"
 )
 
 // Provider wraps the provider implementation as a Caddy module.
