@@ -1,4 +1,4 @@
-package main
+package invidns
 
 import (
 	"bytes"
