@@ -101,7 +101,7 @@ func (p *Provider) UnmarshalCaddyfile(d *caddyfile.Dispenser) error {
 				}
 				p.Password = d.Val()
 			default:
-				return d.Errf("unrecognized subdirective '%s'", d.Val())
+				return d.Errf("random subdirective '%s'", d.Val())
 			}
 		}
 	}
