@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"net/http"
 	"time"
+
 	"github.com/caddyserver/caddy/v2"
 	"github.com/caddyserver/caddy/v2/caddyconfig/caddyfile"
 )
@@ -25,7 +26,7 @@ func init() {
 // CaddyModule returns the Caddy module information.
 func (Provider) CaddyModule() caddy.ModuleInfo {
 	return caddy.ModuleInfo{
-		ID:  "dns.providers.customdns",
+		ID:  "dns.providers.invidns",
 		New: func() caddy.Module { return new(Provider) },
 	}
 }
@@ -89,17 +90,17 @@ func (p *Provider) UnmarshalCaddyfile(d *caddyfile.Dispenser) error {
 				if !d.NextArg() {
 					return d.ArgErr()
 				}
-				p.URL = d.Val()
+				p.URL = d.Val() // Assign URL argument
 			case "username":
 				if !d.NextArg() {
 					return d.ArgErr()
 				}
-				p.Username = d.Val()
+				p.Username = d.Val() // Assign username argument
 			case "password":
 				if !d.NextArg() {
 					return d.ArgErr()
 				}
-				p.Password = d.Val()
+				p.Password = d.Val() // Assign password argument
 			default:
 				return d.Errf("random subdirective '%s'", d.Val())
 			}
