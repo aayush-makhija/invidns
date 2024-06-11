@@ -77,8 +77,8 @@ func (p *Provider) SendRequest() error {
 
 // UnmarshalCaddyfile sets up the DNS provider from Caddyfile tokens. Syntax:
 //
-//	requestbin {
-//	    url <requestbin_url>
+//	invidns {
+//	    url <url>
 //	    username <username>
 //	    password <password>
 //	}
