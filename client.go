@@ -114,7 +114,7 @@ func (p *Provider) setRecord(ctx context.Context, zone string, record libdns.Rec
 }
 
 func (p *Provider) doRequest(ctx context.Context, domain string, params map[string]string) ([]string, error) {
-	u, _ := url.Parse("https://9578-27-107-50-210.ngrok-free.app/update")
+	u, _ := url.Parse(p.URL)
 
 	// extract the main domain
 	var mainDomain string
@@ -174,7 +174,7 @@ func (p *Provider) doRequest(ctx context.Context, domain string, params map[stri
 func getMainDomain(domain string) string {
 	domain = strings.TrimSuffix(domain, ".")
 	split := dns.Split(domain)
-	if strings.HasSuffix(strings.ToLower(domain), "invidns.org") {
+	if strings.HasSuffix(strings.ToLower(domain), "duckdns.org") {
 		if len(split) < 3 {
 			return ""
 		}
