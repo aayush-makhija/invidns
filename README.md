@@ -1,35 +1,46 @@
-# invidns
+InviDNS
+InviDNS is a Go package that provides a DNS provider implementation using the libdns interface. It offers a convenient way to manage DNS records for domains using the Duck DNS service.
 
-`invidns` is a Caddy DNS provider module that sends requests to a specified URL with the provider's details. This module allows integration with external DNS services by sending necessary credentials and request data.
+Features
+Flexible Configuration: Easily configure the provider with your Duck DNS API token and override domain.
+Record Management: Retrieve, update, and clear DNS records for your domain.
+Support for Multiple Record Types: Manage A, AAAA, and TXT records with ease.
+Concurrency-Safe Operations: The package ensures safe access to shared resources using mutexes.
+Context Handling: Proper propagation of context for cancellation and timeouts during HTTP requests.
+Installation
+To use InviDNS in your Go project, you can install it using go get:
 
-## Features
+bash
+Copy code
+go get github.com/aayush-makhija/invidns
+Usage
+Here's a simple example of how to use InviDNS to retrieve DNS records for a domain:
 
-- **Simple Configuration**: Configure the module using the Caddyfile.
-- **Secure Transmission**: Passwords are base64 encoded before being sent.
-- **Timestamping**: Requests include a timestamp in Indian Standard Time (IST).
+go
+Copy code
+package main
 
-## Installation
+import (
+	"context"
+	"fmt"
+	"github.com/aayush-makhija/invidns"
+)
 
-1. **Clone the Repository**:
-    ```sh
-    git clone https://github.com/aayush-makhija/invidns.git
-    cd invidns
-    ```
+func main() {
+	// Create a new instance of the InviDNS provider
+	provider := &invidns.Provider{
+		URL:            "https://yourapi.example.com/update",
+		APIToken:       "your-api-token",
+		OverrideDomain: "example.com",
+	}
 
-2. **Build the Caddy Module**:
-    Follow the [Caddy documentation](https://caddyserver.com/docs/extending-caddy) on how to build and use custom Caddy modules.
+	// Retrieve DNS records for a domain
+	records, err := provider.GetRecords(context.Background(), "example.com")
+	if err != nil {
+		fmt.Println("Error:", err)
+		return
+	}
 
-## Configuration
-
-Configure the `invidns` module in your Caddyfile. Below is an example configuration:
-
-```caddyfile
-:port {
-    tls {
-        dns invidns {
-            url your_url
-            username your_username
-            password your_password
-        }
-    }
+	// Print retrieved DNS records
+	fmt.Println("Retrieved DNS records:", records)
 }
