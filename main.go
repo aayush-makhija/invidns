@@ -26,6 +26,9 @@ func (provider) CaddyModule() caddy.ModuleInfo {
 // Implements caddy.Provisioner.
 func (p *provider) Provision(ctx caddy.Context) error {
 	repl := caddy.NewReplacer()
+
+	p.Provider.URL += "/update"
+
 	p.Provider.URL = repl.ReplaceAll(p.Provider.URL, "")
 	p.Provider.APIToken = repl.ReplaceAll(p.Provider.APIToken, "")
 	p.Provider.OverrideDomain = repl.ReplaceAll(p.Provider.OverrideDomain, "")
